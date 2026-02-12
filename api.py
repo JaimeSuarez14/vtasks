@@ -10,6 +10,10 @@ def saludar():
 def add(id: int):
   return{ "id" : id}
 
-@app.get('/post/{id}')
-def add(id: int):
+@app.post('/post/{id}')
+def create(id: int):
+  return{ "id" : id}
+
+@app.put('/post/{id}')
+def modificar(id: int):
   return{ "id" : id}
