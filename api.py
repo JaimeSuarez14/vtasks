@@ -9,3 +9,7 @@ def saludar():
 @app.get('/post/{id}')
 def add(id: int):
   return{ "id" : id}
+
+@app.get('/post/{id}')
+def add(id: int):
+  return{ "id" : id}
