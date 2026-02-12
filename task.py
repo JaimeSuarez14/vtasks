@@ -1,12 +1,10 @@
 from fastapi import APIRouter
-from enum import Enum
+from models import StatusType
 
 task_router =  APIRouter()
 task_list = []
 
-class StatusType(str, Enum):
-  DONE = "hecho"
-  PENDING = "pending"
+
 
 @task_router.get("/")
 def get():
