@@ -1,9 +1,10 @@
 from fastapi import FastAPI, APIRouter
+from task import task_router
 
 app = FastAPI()
 router = APIRouter()
 
-@router.get('/')
+@router.get('/hello')
 def saludar():
   return { "saludo": "Hola mundo desde fastapi" }
 
@@ -13,3 +14,4 @@ def add(id: int):
 
 
 app.include_router(router)
+app.include_router(task_router, prefix="/tasks")

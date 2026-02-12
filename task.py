@@ -1,0 +1,37 @@
+from fastapi import APIRouter
+from enum import Enum
+
+task_router =  APIRouter()
+task_list = []
+
+class StatusType(str, Enum):
+  DONE = "hecho"
+  PENDING = "pending"
+
+@task_router.get("/")
+def get():
+  return {'task': task_list}
+
+
+@task_router.post("/{task}")
+def add(task):
+  task_list.append({
+    'task': task,
+    "status" : StatusType.PENDING
+  })
+  return {'task': task_list}
+
+
+@task_router.put("/")
+def update(index: int, task: str, status: StatusType):
+  task_list[index]= {
+    'task': task,
+    'status': status
+  }
+  return {'task': task_list}
+
+
+@task_router.delete("/")
+def delete( index: int):
+  del task_list[index]
+  return {'task': task_list}
