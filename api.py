@@ -21,3 +21,7 @@ def modificar(id: int):
 @app.patch('/post/{id}')
 def modificarNombre(id: int):
   return{ "id" : id}
+
+@app.delete('/post/{id}')
+def eliminar(id: int):
+  return{ "id" : id}
