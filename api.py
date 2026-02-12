@@ -17,3 +17,7 @@ def create(id: int):
 @app.put('/post/{id}')
 def modificar(id: int):
   return{ "id" : id}
+
+@app.patch('/post/{id}')
+def modificarNombre(id: int):
+  return{ "id" : id}
