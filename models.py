@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Annotated
+from typing import Annotated, List, Optional
 from pydantic import AfterValidator, BaseModel, EmailStr, Field, HttpUrl, StringConstraints, field_validator
 
 
@@ -9,7 +9,7 @@ class StatusType(str, Enum):
 
 class Category(BaseModel):
   id: int
-  name: str
+  name: Optional[str]
   url: HttpUrl
 
 class User(BaseModel):
@@ -35,6 +35,7 @@ class Task(BaseModel):
   status: StatusType
   category: Category
   user: User
+  tags : set[str] = set()
 
   #@field_validator('description', mode='after')
   #@classmethod
