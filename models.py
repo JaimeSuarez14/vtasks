@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import Annotated
-from pydantic import AfterValidator, BaseModel, Field, StringConstraints, field_validator
+from pydantic import AfterValidator, BaseModel, EmailStr, Field, HttpUrl, StringConstraints, field_validator
 
 
 class StatusType(str, Enum):
@@ -10,11 +10,16 @@ class StatusType(str, Enum):
 class Category(BaseModel):
   id: int
   name: str
+  url: HttpUrl
 
 class User(BaseModel):
   id: int
   name: str
   username:str
+  email: EmailStr
+
+#pip install email-validator
+
 
 def validar_espacios_y_max(value: str) -> str: 
   if value.strip() == "": 
@@ -25,9 +30,11 @@ def validar_espacios_y_max(value: str) -> str:
 
 class Task(BaseModel):
   id:int =  Field(gt=0)
-  name:  Annotated[str, AfterValidator(validar_espacios_y_max )]  = Field(min_length=3)
+  name:  Annotated[str, AfterValidator(validar_espacios_y_max )]  = Field(min_length=3 )
   description:   Annotated[str, AfterValidator(validar_espacios_y_max)] = Field(min_length=3)
-  status: StatusType 
+  status: StatusType
+  category: Category
+  user: User
 
   #@field_validator('description', mode='after')
   #@classmethod
