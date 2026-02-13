@@ -7,15 +7,17 @@ class StatusType(str, Enum):
   DONE = "hecho"
   PENDING = "pending"
 
-def espacios(value: str) -> str:
-    if value.strip()== "":
-        raise ValueError(f'{value} is not an even number')
-    return value 
+def validar_espacios_y_max(value: str) -> str: 
+  if value.strip() == "": 
+    raise ValueError("El campo no debe contener solo espacios") 
+  if len(value.strip()) > 20: 
+    raise ValueError("Máximo 20 caracteres") 
+  return value
 
 class Task(BaseModel):
   id:int =  Field(gt=0)
-  name:  Annotated[str, AfterValidator(espacios)]  = Field(min_length=3)
-  description:   Annotated[str, AfterValidator(espacios)] = Field(min_length=3)
+  name:  Annotated[str, AfterValidator(validar_espacios_y_max )]  = Field(min_length=3)
+  description:   Annotated[str, AfterValidator(validar_espacios_y_max)] = Field(min_length=3)
   status: StatusType 
 
   #@field_validator('description', mode='after')
