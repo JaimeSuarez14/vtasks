@@ -4,18 +4,14 @@ from models import Task
 task_router =  APIRouter()
 task_list : list[Task]= []
 
-
-
 @task_router.get("/")
 def get():
   return {'task': task_list}
-
 
 @task_router.post("/")
 def add(task: Task):
   task_list.append(task)
   return {'task': task_list}
-
 
 @task_router.put("/{id}")
 def update(id: int, task: Task):
