@@ -7,6 +7,15 @@ class StatusType(str, Enum):
   DONE = "hecho"
   PENDING = "pending"
 
+class Category(BaseModel):
+  id: int
+  name: str
+
+class User(BaseModel):
+  id: int
+  name: str
+  username:str
+
 def validar_espacios_y_max(value: str) -> str: 
   if value.strip() == "": 
     raise ValueError("El campo no debe contener solo espacios") 
